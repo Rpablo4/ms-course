@@ -8,6 +8,14 @@ public class Payment implements Serializable{
 	private String name;
 	private Double dailyIncome;
 	private Integer days;
+	private Double total;
+	
+	public void setTotal(Double total) {
+		this.total = total;
+	}
+	public double getTotal() {
+		return total;
+	}
 	public String getName() {
 		return name;
 	}
@@ -34,6 +42,7 @@ public class Payment implements Serializable{
 		this.name = name;
 		this.dailyIncome = dailyIncome;
 		this.days = days;
+		this.total = days*dailyIncome;
 	}
 	public Payment() {
 	
