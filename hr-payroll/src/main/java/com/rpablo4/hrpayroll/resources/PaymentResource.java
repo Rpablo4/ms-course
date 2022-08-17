@@ -14,6 +14,7 @@ import com.rpablo4.hrpayroll.services.PaymentService;
 @RequestMapping(value = "/payments")
 public class PaymentResource {
 
+
 	@Autowired
 	private PaymentService service;
 	
