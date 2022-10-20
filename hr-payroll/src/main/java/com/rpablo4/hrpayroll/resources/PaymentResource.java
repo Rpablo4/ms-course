@@ -1,5 +1,6 @@
 package com.rpablo4.hrpayroll.resources;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,10 +18,15 @@ public class PaymentResource {
 
 	@Autowired
 	private PaymentService service;
-	
+
+	@HystrixCommand(fallbackMethod = "getPaymentAlt")
 	@GetMapping(value = "/{workerId}/days/{days}")
 	public ResponseEntity<Payment> getPayment(@PathVariable Long workerId, @PathVariable Integer days){
 		Payment payment = service.getPayment(workerId, days);
+		return ResponseEntity.ok(payment);
+	}
+	public ResponseEntity<Payment> getPaymentAlt(Long workerId, Integer days){
+		Payment payment = new Payment("Ruan", 12000.0, days);
 		return ResponseEntity.ok(payment);
 	}
 }
